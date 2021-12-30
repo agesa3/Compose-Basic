@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -26,18 +27,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun myApp() {
+fun myApp(names:List<String> = listOf("World,Compose")) {
     Surface(color = MaterialTheme.colors.background) {
-        Greeting("Agesa.Compose")
+       Column(modifier = Modifier.padding(4.dp)) {
+          for (name in names){
+              Greeting(name)
+          }
+       }
     }
 }
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = MaterialTheme.colors.primary) {
-        Column {
-            Text(text = "Hello!", Modifier.padding(30.dp))
-            Text(text = "$name!", Modifier.padding(30.dp))
+    Surface(color = MaterialTheme.colors.primary,
+    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+        Column (Modifier.padding(30.dp).fillMaxWidth()){
+            Text(text = "Hello!")
+            Text(text = name)
         }
 
     }
@@ -45,7 +52,7 @@ fun Greeting(name: String) {
 
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     BasicComposeTheme {
